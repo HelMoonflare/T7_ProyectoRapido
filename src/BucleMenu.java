@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class BucleMenu {
     ArrayList<HashMap<String, String>> listaInfoFichero;
+    File ruta = null;
     static boolean salir = false;
     static boolean volver = false;
     static Scanner sc = new Scanner(System.in);
@@ -79,13 +80,14 @@ public class BucleMenu {
     }
 
     public void seleccionarCarpeta() {
-        // System.out.println("Escribe la ruta de la carpeta que quieras mostrar:");
-        File ruta = new File("src/Ficheros/");
-
+        System.out.println("Escribe la ruta de la carpeta que quieras mostrar:");
+        ruta = new File(sc.nextLine());
         if (ruta.exists() && ruta.isDirectory()) {
             System.out.println("--------Información de la carpeta---------");
             System.out.println("Nombre: " + ruta.getName());
-            System.out.println("Contenido: " + ruta.listFiles());
+            for (File file : ruta.listFiles()) {
+                System.out.println("Nombre del archivo:"+ file.getName());
+            }
             System.out.println("------------------------------------------");
         } else {
             System.out.println("La carpeta no existe");
@@ -94,7 +96,7 @@ public class BucleMenu {
     }
 
     public ArrayList<HashMap<String, String>> leerArchivo() {
-        File ruta = new File("");
+        
         System.out.println("Escribe la ruta del fichero que quieras leer:");
         System.out.println("Que fichero quieres leer?");
         System.out.println("1. .csv");
@@ -103,7 +105,7 @@ public class BucleMenu {
         int value = Integer.parseInt(sc.nextLine());
         switch (value) {
             case 1:
-                ruta = new File("src/Ficheros/coches.csv");
+                ruta = new File(ruta+"/coches.csv");
                 if (ruta.exists() && ruta.isFile()) {
                     System.out.println("Leyendo fichero .csv");
                     listaInfoFichero = csv.LecturaFicheroCSV(ruta);
@@ -112,6 +114,7 @@ public class BucleMenu {
                         for (Entry<String, String> entry : info.entrySet()) {
                             System.out.println(entry.getKey() + ": " + entry.getValue());
                         }
+                        System.out.println("------------------------------------------");
                     }
                     System.out.println("------------------------------------------");
                 } else {
@@ -119,7 +122,7 @@ public class BucleMenu {
                 }
                 return listaInfoFichero;
             case 2:
-                ruta = new File("src/Ficheros/coches.json");
+                ruta = new File(ruta+"/coches.json");
                 if (ruta.exists() && ruta.isFile()) {
                     System.out.println("Leyendo fichero .json");
                     listaInfoFichero = json.LecturaFicheroJSON(ruta);
@@ -136,7 +139,7 @@ public class BucleMenu {
                 }
                 return listaInfoFichero;
             case 3:
-                ruta = new File("src/Ficheros/coches.xml");
+                ruta = new File(ruta+"/coches.xml");
                 if (ruta.exists() && ruta.isFile()) {
                     System.out.println("Leyendo fichero .xml");
                     listaInfoFichero = xml.LecturaFicheroXML(ruta);
@@ -145,6 +148,7 @@ public class BucleMenu {
                         for (Entry<String, String> entry : info.entrySet()) {
                             System.out.println(entry.getKey() + ": " + entry.getValue());
                         }
+                        System.out.println("------------------------------------------");
                     }
                     System.out.println("------------------------------------------");
                 } else {
