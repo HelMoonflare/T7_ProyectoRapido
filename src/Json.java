@@ -19,12 +19,11 @@ public class Json {
             do {
                 if (linea.equals(objeto)) {
                     infoFichero = new HashMap<String, String>();
-                }
-                else if (!linea.contains("}")&&!linea.contains("]")) {
+                } else if (!linea.contains("}") && !linea.contains("]")) {
                     String[] palabras = linea.split(":");
-                    
-                        infoFichero.put(palabras[0].trim().replace("[\",]","" ), palabras[1].trim().replace("[\",]","" ));
-                    
+
+                    infoFichero.put(palabras[0].trim().replace("[\",]", ""), palabras[1].trim().replace("[\",]", ""));
+
                 } else
                     listaInfoFichero.add(infoFichero);
             } while ((linea = br.readLine()) != null);

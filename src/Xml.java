@@ -21,8 +21,8 @@ public class Xml {
                     infoFichero = new HashMap<String, String>();
                 }
                 else if (!linea.contains("</coche>")&&!linea.contains("</coches>")) {
-                    String[] palabras = linea.split("<[^>]+>");
-                        infoFichero.put(palabras[0], palabras[1]);
+                    String[] palabras = linea.trim().split("[<(/>)]");
+                        infoFichero.put(palabras[1], palabras[2]);
                     
                 } else
                     listaInfoFichero.add(infoFichero);
