@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class Csv {
 
-    public ArrayList<HashMap<String, String>> LecturaFicheroCSV(File ficheroCSV) {
+    public ArrayList<HashMap<String, String>>LecturaFicheroCSV(File ficheroCSV) {
 
         ArrayList<HashMap<String, String>> listaInfoFichero = new ArrayList<HashMap<String, String>>();
         try (BufferedReader br = new BufferedReader(new FileReader(ficheroCSV))) {

@@ -90,7 +90,7 @@ public class BucleMenu {
     }
 
     public static void leerArchivo() {
-        File ruta = new File("\\GitHub\\T7_ProyectoRapido");
+        File ruta = new File("\\src\\Ficheros");
         csv.LecturaFicheroCSV(ruta);
 
         if (ruta.exists() && ruta.isFile()) {

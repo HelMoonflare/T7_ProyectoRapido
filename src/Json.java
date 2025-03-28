@@ -22,9 +22,9 @@ public class Json {
                 }
                 if (!linea.equals("},")) {
                     String[] palabras = linea.split(":");
-                    
-                        infoFichero.put(palabras[0].trim().replace("[\",]","" ), palabras[1].trim().replace("[\",]","" ));
-                    
+
+                    infoFichero.put(palabras[0].trim().replace("[\",]", ""), palabras[1].trim().replace("[\",]", ""));
+
                 } else
                     listaInfoFichero.add(infoFichero);
             } while ((linea = br.readLine()) != null);
