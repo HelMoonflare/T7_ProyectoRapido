@@ -13,12 +13,13 @@ public class Csv {
 
         ArrayList<HashMap<String, String>> listaInfoFichero = new ArrayList<HashMap<String, String>>();
         try (BufferedReader br = new BufferedReader(new FileReader(ficheroCSV))) {
+            String[] columna = br.readLine().split(",");
             String linea;
             while ((linea = br.readLine()) != null) {
                 HashMap<String, String> infoFichero = new HashMap<String, String>();
                 String[] palabras = linea.split(",");
                 for (int i = 0; i < palabras.length; i++) {
-                    infoFichero.put(palabras[i], palabras[i+1]);
+                    infoFichero.put(columna[i], palabras[i]);
                 }
                 listaInfoFichero.add(infoFichero);
 

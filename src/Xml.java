@@ -20,9 +20,8 @@ public class Xml {
                 if (linea.equals(objeto)) {
                     infoFichero = new HashMap<String, String>();
                 }
-                if (!linea.equals("/" + objeto)) {
+                else if (!linea.contains("</coche>")&&!linea.contains("</coches>")) {
                     String[] palabras = linea.split("<[^>]+>");
-                    
                         infoFichero.put(palabras[0], palabras[1]);
                     
                 } else
