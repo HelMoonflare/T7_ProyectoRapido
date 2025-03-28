@@ -20,7 +20,7 @@ public class Json {
                 if (linea.equals(objeto)) {
                     infoFichero = new HashMap<String, String>();
                 }
-                if (!linea.equals("},")) {
+                else if (!linea.contains("}")&&!linea.contains("]")) {
                     String[] palabras = linea.split(":");
                     
                         infoFichero.put(palabras[0].trim().replace("[\",]","" ), palabras[1].trim().replace("[\",]","" ));
@@ -32,6 +32,6 @@ public class Json {
             e.printStackTrace();
         }
 
-        return null;
+        return listaInfoFichero;
     }
 }

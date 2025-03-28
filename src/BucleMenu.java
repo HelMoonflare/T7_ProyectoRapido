@@ -3,9 +3,11 @@ package src;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class BucleMenu {
+    ArrayList<HashMap<String, String>> listaInfoFichero;
     static boolean salir = false;
     static boolean volver = false;
     static Scanner sc = new Scanner(System.in);
@@ -13,13 +15,13 @@ public class BucleMenu {
     static Json json = new Json();
     static Xml xml = new Xml();
 
-    public static void bucle() {
+    public void bucle() {
         do {
             mostrarMenu();
         } while (!salir);
     }
 
-    public static void mostrarMenu() {
+    public void mostrarMenu() {
         System.out.println("---------Menú Principal---------");
         System.out.println("1. Seleccionar una carpeta");
         System.out.println("2. Leer un fichero");
@@ -28,7 +30,7 @@ public class BucleMenu {
         System.out.println("--------------------------------");
         System.out.print("Elige una opción: ");
 
-        int a = sc.nextInt();
+        int a = Integer.parseInt(sc.nextLine());
         switch (a) {
             case 1 -> seleccionarCarpeta();
             case 2 -> leerArchivo();
@@ -47,7 +49,7 @@ public class BucleMenu {
         }
     }
 
-    public static void convertirA() {
+    public void convertirA() {
         System.out.println("-------------------");
         System.out.println("1. .csv");
         System.out.println("2. .json");
@@ -76,9 +78,9 @@ public class BucleMenu {
         }
     }
 
-    public static void seleccionarCarpeta() {
+    public void seleccionarCarpeta() {
         // System.out.println("Escribe la ruta de la carpeta que quieras mostrar:");
-        File ruta = new File("C:\\Users\\ASUS\\Desktop\\D.A.W.1\\Programación\\GitHub\\T7_ProyectoRapido");
+        File ruta = new File("src/Ficheros/");
 
         if (ruta.exists() && ruta.isDirectory()) {
             System.out.println("--------Información de la carpeta---------");
@@ -91,10 +93,8 @@ public class BucleMenu {
 
     }
 
-    public static void leerArchivo() {
+    public ArrayList<HashMap<String, String>> leerArchivo() {
         File ruta = new File("");
-        
-        ArrayList<HashMap<String, String>> listaInfoFichero = new ArrayList<HashMap<String, String>>();
         System.out.println("Escribe la ruta del fichero que quieras leer:");
         System.out.println("Que fichero quieres leer?");
         System.out.println("1. .csv");
@@ -106,65 +106,57 @@ public class BucleMenu {
                 ruta = new File("src/Ficheros/coches.csv");
                 if (ruta.exists() && ruta.isFile()) {
                     System.out.println("Leyendo fichero .csv");
-                    listaInfoFichero=csv.LecturaFicheroCSV(ruta);
+                    listaInfoFichero = csv.LecturaFicheroCSV(ruta);
                     System.out.println("--------Información del fichero---------");
                     for (HashMap<String, String> info : listaInfoFichero) {
-                        System.out.println("Nombre: " + info.get("Nombre"));
-                        System.out.println("Marca: " + info.get("Marca"));
-                        System.out.println("Modelo: " + info.get("Modelo"));
-                        System.out.println("Año: " + info.get("Año"));
-                        System.out.println("Precio: " + info.get("Precio"));
-                        System.out.println("------------------------------------------");
+                        for (Entry<String, String> entry : info.entrySet()) {
+                            System.out.println(entry.getKey() + ": " + entry.getValue());
+                        }
                     }
                     System.out.println("------------------------------------------");
                 } else {
                     System.out.println("El archivo no existe");
                 }
-                break;
+                return listaInfoFichero;
             case 2:
-                 ruta = new File("src/Ficheros/coches.json");
+                ruta = new File("src/Ficheros/coches.json");
                 if (ruta.exists() && ruta.isFile()) {
                     System.out.println("Leyendo fichero .json");
-                    listaInfoFichero=json.LecturaFicheroJSON(ruta);
+                    listaInfoFichero = json.LecturaFicheroJSON(ruta);
                     System.out.println("--------Información del fichero---------");
                     for (HashMap<String, String> info : listaInfoFichero) {
-                        System.out.println("Marca: " + info.get("Marca"));
-                        System.out.println("Modelo: " + info.get("Modelo"));
-                        System.out.println("Año: " + info.get("Año"));
-                        System.out.println("Color: " + info.get("Color"));
-                        System.out.println("Precio: " + info.get("Precio"));
+                        for (Entry<String, String> entry : info.entrySet()) {
+                            System.out.println(entry.getKey() + ": " + entry.getValue());
+                        }
                         System.out.println("------------------------------------------");
                     }
                     System.out.println("------------------------------------------");
                 } else {
                     System.out.println("El archivo no existe");
                 }
-                break;
+                return listaInfoFichero;
             case 3:
-                 ruta = new File("src/Ficheros/coches.xml");
+                ruta = new File("src/Ficheros/coches.xml");
                 if (ruta.exists() && ruta.isFile()) {
                     System.out.println("Leyendo fichero .xml");
-                    listaInfoFichero=xml.LecturaFicheroXML(ruta);
+                    listaInfoFichero = xml.LecturaFicheroXML(ruta);
                     System.out.println("--------Información del fichero---------");
                     for (HashMap<String, String> info : listaInfoFichero) {
-                        System.out.println("Marca: " + info.get("<Marca>"));
-                        System.out.println("Modelo: " + info.get("<Modelo>"));
-                        System.out.println("Año: " + info.get("<Año>"));
-                        System.out.println("Color: " + info.get("<Color>"));
-                        System.out.println("Precio: " + info.get("<Precio>"));
+                        for (Entry<String, String> entry : info.entrySet()) {
+                            System.out.println(entry.getKey() + ": " + entry.getValue());
+                        }
                         System.out.println("------------------------------------------");
                     }
                     System.out.println("------------------------------------------");
                 } else {
                     System.out.println("El archivo no existe");
                 }
-                break;
+                return listaInfoFichero;
             default:
-            System.out.println("Opción inválida");
-                break;
+                System.out.println("Opción inválida");
+                return null;
         }
 
-        
     }
 
 }
