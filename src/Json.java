@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class Json {
 
-    public static ArrayList<HashMap<String, String>> LecturaFicheroJSON(File fileJSON) {
+    public ArrayList<HashMap<String, String>> LecturaFicheroJSON(File fileJSON) {
         ArrayList<HashMap<String, String>> listaInfoFichero = new ArrayList<HashMap<String, String>>();
         try (BufferedReader br = new BufferedReader(new FileReader(fileJSON))) {
             String linea;
@@ -19,8 +19,7 @@ public class Json {
             do {
                 if (linea.equals(objeto)) {
                     infoFichero = new HashMap<String, String>();
-                }
-                if (!linea.equals("},")) {
+                } else if (!linea.contains("}") && !linea.contains("]")) {
                     String[] palabras = linea.split(":");
 
                     infoFichero.put(palabras[0].trim().replace("[\",]", ""), palabras[1].trim().replace("[\",]", ""));
@@ -32,6 +31,6 @@ public class Json {
             e.printStackTrace();
         }
 
-        return null;
+        return listaInfoFichero;
     }
 }
