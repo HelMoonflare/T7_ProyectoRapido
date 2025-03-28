@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class Xml {
 
-    public static ArrayList<HashMap<String, String>> LecturaFicheroXML(File fileXML) {
+    public ArrayList<HashMap<String, String>> LecturaFicheroXML(File fileXML) {
         ArrayList<HashMap<String, String>> listaInfoFichero = new ArrayList<HashMap<String, String>>();
         try (BufferedReader br = new BufferedReader(new FileReader(fileXML))) {
             String linea;

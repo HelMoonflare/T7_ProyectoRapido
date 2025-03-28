@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class Json {
 
-    public static ArrayList<HashMap<String, String>> LecturaFicheroJSON(File fileJSON) {
+    public ArrayList<HashMap<String, String>> LecturaFicheroJSON(File fileJSON) {
         ArrayList<HashMap<String, String>> listaInfoFichero = new ArrayList<HashMap<String, String>>();
         try (BufferedReader br = new BufferedReader(new FileReader(fileJSON))) {
             String linea;
