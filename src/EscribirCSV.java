@@ -5,26 +5,35 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map.Entry;
 
 public class EscribirCSV {
     static String ruta = "src/Ficheros/archivoEscrito.csv";
 
-    public static void escribirCSV(ArrayList<HashMap<String, String>> csv) {
-        FileWriter fw;
+    public void escribirCSV(ArrayList<HashMap<String, String>> csv) {
         BufferedWriter bw = null;
         try {
-            fw = new FileWriter(ruta);
-            bw = new BufferedWriter(fw);
-            for (int i = 0; i < csv.size(); i++) {
-                HashMap<String, String> mapa = csv.get(i);
-
-                for (Entry<String, String> entry : mapa.entrySet()) {
-                    if (i == 0) {
-                        System.out.println(entry.getKey() + entry.getValue() + ",");
-                    }
-                    System.out.println(entry.getValue() + ",");
+            bw = new BufferedWriter(new FileWriter(ruta));
+            HashMap<String, String> primeraFila = csv.get(0);
+            int c = 0;
+            for (String key : primeraFila.keySet()) {
+                bw.write(key);
+                if (c < primeraFila.size() - 1) {
+                    bw.write(", ");
                 }
+                c++;
+            }
+            bw.write("\n");
+
+            for (HashMap<String, String> fila : csv) {
+                c = 0;
+                for (String value : fila.values()) {
+                    bw.write(value);
+                    if (c < fila.size() - 1) {
+                        bw.write(", ");
+                    }
+                    c++;
+                }
+                bw.write("\n");
             }
 
         } catch (IOException e) {

@@ -5,28 +5,40 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map.Entry;
+import java.util.Map;
 
 public class EscribirJson {
     static String ruta = "src/Ficheros/archivoEscrito.json";
 
-    public static void escribirJson(ArrayList<HashMap<String, String>> json) {
-        FileWriter fw;
+    public void escribirJson(ArrayList<HashMap<String, String>> json) {
         BufferedWriter bw = null;
         try {
-            fw = new FileWriter(ruta);
-            bw = new BufferedWriter(fw);
-            System.out.println("[");
+            bw = new BufferedWriter(new FileWriter(ruta));
+            bw.write("[\n");
+
             for (int i = 0; i < json.size(); i++) {
                 HashMap<String, String> mapa = json.get(i);
-                System.out.println("{");
-                for (Entry<String, String> entry : mapa.entrySet()) {
-                    System.out.println(entry.getKey() + ":" + entry.getValue());
-                }
-                System.out.println("}");
+                bw.write("\t{\n");
 
+                int c = 0;
+                int size = mapa.size();
+                for (Map.Entry<String, String> entry : mapa.entrySet()) {
+                    bw.write("\t\t\"" + entry.getKey() + "\": \"" + entry.getValue() + "\"");
+                    if (c < size - 1) {
+                        bw.write(",");
+                    }
+                    bw.write("\n");
+                    c++;
+                }
+
+                bw.write("\t}");
+                if (i < json.size() - 1) {
+                    bw.write(",");
+                }
+                bw.write("\n");
             }
-            System.out.println("]");
+
+            bw.write("]");
 
 
         } catch (IOException e) {

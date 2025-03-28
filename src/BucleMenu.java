@@ -12,9 +12,15 @@ public class BucleMenu {
     static boolean salir = false;
     static boolean volver = false;
     static Scanner sc = new Scanner(System.in);
+
     static Csv csv = new Csv();
+    EscribirCSV escribirCSV;
+
     static Json json = new Json();
+    static EscribirJson escribirJson;
+
     static Xml xml = new Xml();
+    static EscribirXML escribirXML;
 
     public void bucle() {
         do {
@@ -63,15 +69,24 @@ public class BucleMenu {
         switch (b) {
             case 1 -> {
                 System.out.println("Convirtiendo a .csv");
+                escribirCSV = new EscribirCSV();
+                escribirCSV.escribirCSV(listaInfoFichero);
+                System.out.println("Conversión finalizada");
                 System.out.println();
             }
 
             case 2 -> {
                 System.out.println("Convirtiendo a .json");
+                escribirJson = new EscribirJson();
+                escribirJson.escribirJson(listaInfoFichero);
+                System.out.println("Conversión finalizada");
                 System.out.println();
             }
             case 3 -> {
                 System.out.println("Convirtiendo a .xml");
+                escribirXML = new EscribirXML();
+                escribirXML.escribirXML(listaInfoFichero);
+                System.out.println("Conversión finalizada");
                 System.out.println();
             }
             case 4 -> volver = true;
@@ -80,13 +95,13 @@ public class BucleMenu {
     }
 
     public void seleccionarCarpeta() {
-        System.out.println("Escribe la ruta de la carpeta que quieras mostrar:");
+        System.out.print("Escribe la ruta de la carpeta que quieras mostrar: ");
         ruta = new File(sc.nextLine());
         if (ruta.exists() && ruta.isDirectory()) {
             System.out.println("--------Información de la carpeta---------");
             System.out.println("Nombre: " + ruta.getName());
             for (File file : ruta.listFiles()) {
-                System.out.println("Nombre del archivo:"+ file.getName());
+                System.out.println("Nombre del archivo: " + file.getName());
             }
             System.out.println("------------------------------------------");
         } else {
@@ -96,7 +111,7 @@ public class BucleMenu {
     }
 
     public ArrayList<HashMap<String, String>> leerArchivo() {
-        
+
         System.out.println("Escribe la ruta del fichero que quieras leer:");
         System.out.println("Que fichero quieres leer?");
         System.out.println("1. .csv");
@@ -105,7 +120,7 @@ public class BucleMenu {
         int value = Integer.parseInt(sc.nextLine());
         switch (value) {
             case 1:
-                ruta = new File(ruta+"/coches.csv");
+                ruta = new File(ruta + "/coches.csv");
                 if (ruta.exists() && ruta.isFile()) {
                     System.out.println("Leyendo fichero .csv");
                     listaInfoFichero = csv.LecturaFicheroCSV(ruta);
@@ -122,7 +137,7 @@ public class BucleMenu {
                 }
                 return listaInfoFichero;
             case 2:
-                ruta = new File(ruta+"/coches.json");
+                ruta = new File(ruta + "/coches.json");
                 if (ruta.exists() && ruta.isFile()) {
                     System.out.println("Leyendo fichero .json");
                     listaInfoFichero = json.LecturaFicheroJSON(ruta);
@@ -139,7 +154,7 @@ public class BucleMenu {
                 }
                 return listaInfoFichero;
             case 3:
-                ruta = new File(ruta+"/coches.xml");
+                ruta = new File(ruta + "/coches.xml");
                 if (ruta.exists() && ruta.isFile()) {
                     System.out.println("Leyendo fichero .xml");
                     listaInfoFichero = xml.LecturaFicheroXML(ruta);

@@ -10,22 +10,20 @@ import java.util.Map.Entry;
 public class EscribirXML {
     static String ruta = "src/Ficheros/archivoEscrito.xml";
 
-    public static void escribirXML(ArrayList<HashMap<String, String>> xml) {
-        FileWriter fw;
+    public void escribirXML(ArrayList<HashMap<String, String>> xml) {
         BufferedWriter bw = null;
         try {
-            fw = new FileWriter(ruta);
-            bw = new BufferedWriter(fw);
-            System.out.println("<elementos>");
+            bw = new BufferedWriter(new FileWriter(ruta));
+            bw.write("<coches>\n");
             for (int i = 0; i < xml.size(); i++) {
                 HashMap<String, String> mapa = xml.get(i);
-                System.out.println("<elemento>");
+                bw.write("\t<coche>\n");
                 for (Entry<String, String> entry : mapa.entrySet()) {
-                    System.out.println("<" + entry.getKey() + ">" + entry.getValue() + "</" + entry.getKey() + ">");
+                    bw.write("\t\t<" + entry.getKey() + ">" + entry.getValue() + "</" + entry.getKey() + ">\n");
                 }
-                System.out.println("</elemento>");
+                bw.write("\t</coche>\n");
             }
-            System.out.println("</elementos>");
+            bw.write("</coches>");
 
         } catch (IOException e) {
             System.err.println("Error al escribir " + e.getMessage());
