@@ -7,6 +7,9 @@ public class BucleMenu {
     static boolean salir = false;
     static boolean volver = false;
     static Scanner sc = new Scanner(System.in);
+    static Csv csv = new Csv();
+    static Json json = new Json();
+    static Xml xml = new Xml();
 
     public static void bucle() {
         do {
@@ -88,6 +91,7 @@ public class BucleMenu {
 
     public static void leerArchivo() {
         File ruta = new File("\\GitHub\\T7_ProyectoRapido");
+        csv.LecturaFicheroCSV(ruta);
 
         if (ruta.exists() && ruta.isFile()) {
             System.out.println("Nombre del archivo: " + ruta.getName());
